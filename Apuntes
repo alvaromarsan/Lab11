@@ -63,4 +63,9 @@
     ----------------
     Utilizando la herramienta ADExplorer.exe de SysInternals, le indicamos la IP del Servidor LDAP y le damos a conectar.
     
-  
+  2.4 Enumeración DNS
+  -------------------
+  nslookup
+  > server [ip-server]
+  > ceh.com
+  > server2016.ceh.com
