@@ -1,0 +1,16 @@
+1. Escaneo de la red para averiguar las máquinas
+-------------------------------------------------
+nmap -sn [direccion-red] -oN machines
+
+2. Escaneo profundo individual de cada una de las máquinas
+-----------------------------------------------------------
+nmap -A -Pn [ip_machina] -oN [W10|WS19|WS16|Ubuntu|Android]
+
+3. Extraer información acerca de carpetas compartidas - Enumeración NetBIOS
+----------------------------------------------------------------------------
+nmap -sV -v --script nbstat.nse 192.168.10.16
+
+4. Enumeración SNMP
+---------------------
+snmp-check [ip] > snmpEnum.txt
+
