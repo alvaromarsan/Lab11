@@ -1,16 +1,62 @@
-1. Escaneo de la red para averiguar las máquinas
--------------------------------------------------
-nmap -sn [direccion-red] -oN machines
+1. Fase de Escaneo
+---------------
+  1.1 Escaneo de la red para averiguar las máquinas
+  -------------------------------------------------
+  nmap -sn [direccion-red] -oN machines
 
-2. Escaneo profundo individual de cada una de las máquinas
------------------------------------------------------------
-nmap -A -Pn [ip_machina] -oN [W10|WS19|WS16|Ubuntu|Android]
+  1.2 Escaneo profundo individual de cada una de las máquinas
+  -----------------------------------------------------------
+  nmap -A -Pn [ip_machina] -oN [W10|WS19|WS16|Ubuntu|Android]
 
-3. Extraer información acerca de carpetas compartidas - Enumeración NetBIOS
-----------------------------------------------------------------------------
-nmap -sV -v --script nbstat.nse 192.168.10.16
+  1.3 Devolver el escaneo en formato XML para poder insertarlo en Metasploit
+  -------------------------------------------------------------------------
+    Escaneo para importar a Metasploit
+    ----------------------------------
+    nmap -A -Pn -n 192.168.10.0/24 -oX fichero (Importante: Lanzarlo como root)
+    
+    Preparar Metasploit para utilizar la base de datos
+    --------------------------------------------------
+    - Comprobar que postgreSQL --> systemctl status postgresql
+    - Conectar la base de datos a Metasploit --> msfdb init
+    - Reiniciamos el servicio de postgreSQL --> systemctl restart postgresql
+    
+    Importar información a Metasploit
+    ---------------------------------
+    db_import [path]
 
-4. Enumeración SNMP
+2. Fase de enumeración
 ---------------------
-snmp-check [ip] > snmpEnum.txt
+  2.1 Extraer información acerca de carpetas compartidas - Enumeración NetBIOS
+  ----------------------------------------------------------------------------
+  nmap -sV -v --script nbstat.nse 192.168.10.16
 
+  2.2 Enumeración SNMP
+  ---------------------
+  snmp-check [ip] > snmpEnum.txt
+  
+  2.2.1 Enumeración SNMP de usuarios con Metasploit
+  -----------------------------------
+  use auxiliary/scanner/snmp/snmp_enumusers
+  Nos pide el host al que vamos a escanear --> set rhosts 192.168.10.16
+  
+  2.3 Enumeración LDAP
+  --------------------
+    Desde Parrot
+    ------------
+    ldap -x -b "dc=ceh,dc=com" "*" -h [ip-ldap-server] --> No funciona
+    
+      Enumeración LDAP desde NMAP
+      ---------------------------
+        - Enumeración Completa
+        --------------------
+        nmap -p389 --script ldap-search --script-args 'ldap.username="cn=[user],cn=users,dc=[domain],dc=[TLD]",ldap.password="[pass]"' [IP]
+
+        - Enumeración de los Usuarios, filtrando por el atributo del nombre de la cuenta
+        -----------------------------------------------------------------------------------------------------
+        nmap -p389 --script ldap-search --script-args 'ldap.username="cn=[user],cn=users,dc=[domain],dc=[TLD]",ldap.password="[pass]",ldap.qfilter=users,ldap.attrib=sAMAccountName' [IP]
+    
+    Desde Windows 10
+    ----------------
+    Utilizando la herramienta ADExplorer.exe de SysInternals, le indicamos la IP del Servidor LDAP y le damos a conectar.
+    
+  
