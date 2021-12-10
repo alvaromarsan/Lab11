@@ -29,6 +29,10 @@
   2.1 Extraer información acerca de carpetas compartidas - Enumeración NetBIOS
   ----------------------------------------------------------------------------
   nmap -sV -v --script nbstat.nse 192.168.10.16
+  
+  Enumeración NetBIOS con enum4linux
+  ----------------------------------
+  enum4linux -n [IP]
 
   2.2 Enumeración SNMP
   ---------------------
