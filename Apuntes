@@ -119,8 +119,8 @@
   responder -I [interfaz_red] (Mirar las interfaces de red antes ifconfig|ip address)
   
   Desde la máquina de Windows 10 hacemos lo siguiente:
-    - Abrimos el explorador de ficheros
-    - Buscamos la carpeta \\CarpetaCEH
+   - Abrimos el explorador de ficheros
+   - Buscamos la carpeta \\CarpetaCEH
   
   Podemos ver que en responder nos sale el Hash NTLMv2 del usuario que se ha intentado conectar.
   
@@ -129,6 +129,8 @@
   Ahora para romper el hash utilizamos John the Ripper.
   -----------------------------------------------------
   john --wordlist=[path-diccionario] [path-hash]
+  
+  En el examen ponemos el responder para ver si capturamos algún hash, dado que es posible que las máquinas estén haciendo peticiones.
   
   Atacando desde Windows 10
   -------------------------
