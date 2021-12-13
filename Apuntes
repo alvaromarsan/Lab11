@@ -65,7 +65,74 @@
     
   2.4 Enumeración DNS
   -------------------
-  nslookup
-  > server [ip-server]
-  > ceh.com
-  > server2016.ceh.com
+   nslookup
+   > server [ip-server]
+   > ceh.com
+   > server2016.ceh.com
+  
+5. Análisis de vulnerabilidades
+-------------------------------
+  Configuración de OpenVAS
+  ---------------------------
+    Crear directorios
+    -----------------
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/configs
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/port_lists
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/report_formats
+
+    Descargar la información para la configuración
+    ----------------------------------------------
+    greenbone-feed-sync --type GVMD_DATA
+
+    Actualizar la BD de OpenVAS desde el interfaz gráfico
+    -----------------------------------------------------
+    Aplicaciones/Pentesting/Análisis de Vulnerabilidades/OpenVAS - Greenbone/Update New Database
+
+    Lanzamos OpenVAS
+    ----------------
+    Aplicaciones/Pentesting/Análisis de Vulnerabilidades/OpenVAS - Greenbone/Start Greenbone Vulnerability Manager Service
+
+    Realizar un escaneo
+    -------------------
+    - Scans/Task/Task Wizard.
+    - Indicamos la IP objetivo del escaner de vulnerabilidades.
+    - Le damos a Strat Scan.
+
+  Análisis de vulnerabilidades para Aplicaciones Web
+  -----------------------------------------------------
+    Ver la ayuda de Nikto
+    ---------------------
+    nikto -H
+
+    Lanzar escaneo con todas las opciones disponibles
+    -------------------------------------------------
+    nikto -h [host] -Tuning x
+
+    Exportar el resultado del escaneo a un fichero
+    ----------------------------------------------
+    nikto -h [host] -o Resultado -F txt
+  
+6. Hacking
+----------
+  Capturar Hashes con Responder
+  -----------------------------
+  responder -I [interfaz_red] (Mirar las interfaces de red antes ifconfig|ip address)
+  
+  Desde la máquina de Windows 10 hacemos lo siguiente:
+    - Abrimos el explorador de ficheros
+    - Buscamos la carpeta \\CarpetaCEH
+  
+  Podemos ver que en responder nos sale el Hash NTLMv2 del usuario que se ha intentado conectar.
+  
+  Copiamos el hash a un archivo.
+  
+  Ahora para romper el hash utilizamos John the Ripper.
+  -----------------------------------------------------
+  john --wordlist=[path-diccionario] [path-hash]
+  
+  Atacando desde Windows 10
+  -------------------------
+  
+  
+  
+  
