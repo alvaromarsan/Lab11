@@ -1,0 +1,41 @@
+5. Análisis de vulnerabilidades
+-------------------------------
+  Configuración de OpenVAS
+  ---------------------------
+    Crear directorios
+    -----------------
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/configs
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/port_lists
+    mkdir -p /var/lib/gvm/data-objects/gvmd/20.08/report_formats
+
+    Descargar la información para la configuración
+    ----------------------------------------------
+    greenbone-feed-sync --type GVMD_DATA
+
+    Actualizar la BD de OpenVAS desde el interfaz gráfico
+    -----------------------------------------------------
+    Aplicaciones/Pentesting/Análisis de Vulnerabilidades/OpenVAS - Greenbone/Update New Database
+
+    Lanzamos OpenVAS
+    ----------------
+    Aplicaciones/Pentesting/Análisis de Vulnerabilidades/OpenVAS - Greenbone/Start Greenbone Vulnerability Manager Service
+
+    Realizar un escaneo
+    -------------------
+    - Scans/Task/Task Wizard.
+    - Indicamos la IP objetivo del escaner de vulnerabilidades.
+    - Le damos a Strat Scan.
+
+  Análisis de vulnerabilidades para Aplicaciones Web
+  -----------------------------------------------------
+    Ver la ayuda de Nikto
+    ---------------------
+    nikto -H
+
+    Lanzar escaneo con todas las opciones disponibles
+    -------------------------------------------------
+    nikto -h [host] -Tuning x
+
+    Exportar el resultado del escaneo a un fichero
+    ----------------------------------------------
+    nikto -h [host] -o Resultado -F txt
