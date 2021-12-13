@@ -1,0 +1,25 @@
+Fase de Escaneo
+---------------
+  1. Escaneo de la red para averiguar las máquinas
+  -------------------------------------------------
+  nmap -sn [direccion-red] -oN machines
+
+  2 Escaneo profundo individual de cada una de las máquinas
+  -----------------------------------------------------------
+  nmap -A -Pn [ip_machina] -oN [W10|WS19|WS16|Ubuntu|Android]
+
+  3 Devolver el escaneo en formato XML para poder insertarlo en Metasploit
+  -------------------------------------------------------------------------
+    Escaneo para importar a Metasploit
+    ----------------------------------
+    nmap -A -Pn -n 192.168.10.0/24 -oX fichero (Importante: Lanzarlo como root)
+    
+    Preparar Metasploit para utilizar la base de datos
+    --------------------------------------------------
+    - Comprobar que postgreSQL --> systemctl status postgresql
+    - Conectar la base de datos a Metasploit --> msfdb init
+    - Reiniciamos el servicio de postgreSQL --> systemctl restart postgresql
+    
+    Importar información a Metasploit
+    ---------------------------------
+    db_import [path]
