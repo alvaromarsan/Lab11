@@ -1,0 +1,45 @@
+Fase de enumeración
+---------------------
+  1 Extraer información acerca de carpetas compartidas - Enumeración NetBIOS
+  ----------------------------------------------------------------------------
+  nmap -sV -v --script nbstat.nse 192.168.10.16
+  
+  Enumeración NetBIOS con enum4linux
+  ----------------------------------
+  enum4linux -n [IP]
+
+  2 Enumeración SNMP
+  ---------------------
+  snmp-check [ip] > snmpEnum.txt
+  
+  2.1 Enumeración SNMP de usuarios con Metasploit
+  -----------------------------------
+  use auxiliary/scanner/snmp/snmp_enumusers
+  Nos pide el host al que vamos a escanear --> set rhosts 192.168.10.16
+  
+  3 Enumeración LDAP
+  --------------------
+    Desde Parrot
+    ------------
+    ldap -x -b "dc=ceh,dc=com" "*" -h [ip-ldap-server] --> No funciona
+    
+      Enumeración LDAP desde NMAP
+      ---------------------------
+        - Enumeración Completa
+        --------------------
+        nmap -p389 --script ldap-search --script-args 'ldap.username="cn=[user],cn=users,dc=[domain],dc=[TLD]",ldap.password="[pass]"' [IP]
+
+        - Enumeración de los Usuarios, filtrando por el atributo del nombre de la cuenta
+        -----------------------------------------------------------------------------------------------------
+        nmap -p389 --script ldap-search --script-args 'ldap.username="cn=[user],cn=users,dc=[domain],dc=[TLD]",ldap.password="[pass]",ldap.qfilter=users,ldap.attrib=sAMAccountName' [IP]
+    
+    Desde Windows 10
+    ----------------
+    Utilizando la herramienta ADExplorer.exe de SysInternals, le indicamos la IP del Servidor LDAP y le damos a conectar.
+    
+  4 Enumeración DNS
+  -------------------
+  nslookup
+  > server [ip-server]
+  > ceh.com
+  > server2016.ceh.com
