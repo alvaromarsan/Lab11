@@ -119,8 +119,8 @@
   responder -I [interfaz_red] (Mirar las interfaces de red antes ifconfig|ip address)
   
   Desde la máquina de Windows 10 hacemos lo siguiente:
-   - Abrimos el explorador de ficheros
-   - Buscamos la carpeta \\CarpetaCEH
+   - Abrimos el explorador de ficheros.
+   - Buscamos la carpeta \\CarpetaCEH.
   
   Podemos ver que en responder nos sale el Hash NTLMv2 del usuario que se ha intentado conectar.
   
@@ -139,6 +139,15 @@
     - L0phtCrack
     - RainbowCrack
     
-    
+  Esteganografía
+  --------------
+  Este proceso se hará desde la máquina Windows 10 que nos den en el examen y tendremos las siguientes herramientas:
+   - OpenStego (Imágenes).
+   - SNOW (Espacios en blanco).
+  
+  En este desafío nos darán una imagen y nos dirán que hay algo oculto, en un desafío previo habremos conseguido la contraseña.
+  
+  
+  
   
   
