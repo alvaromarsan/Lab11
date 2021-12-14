@@ -217,7 +217,43 @@
     ----------
     hping3 -p [port] -S --flood [ip]
     
- Session Hijacking
- -----------------
- 
+  Ataque por diccionario a FTP con THC Hydra
+  ------------------------------------------
+  Creamos un par de diccionarios:
+    - usuarios.txt
+    - passwords.txt
+  
+  Lanzamos hydra con el comando: hydra -L [fichero_usuarios] -P [fichero_passwords] ftp://[IP]
     
+  Ataque por diccionario a una página web con Burpsuite
+  -----------------------------------------------------
+  1. Abrimos Burpsuite.
+  2. Configuramos el Firefox para que use el 127.0.0.1:8080 como proxy.
+  3. Desde firefox hacemos un intento de login para que Burpsuite lo intercepte.
+  4. Mandamos el intento de login al Intruder.
+  5. En el Intruder, marcamos el usuario y la contraseña y lo configuramos como Cluster Bomb.
+  6. Cargamos los ficheros de username.txt y password.txt.
+  7. Le damos a Start Attack para que comience a probar las combinaciones.
+  
+  Laboratorio CSRF
+  ----------------
+  API WPSCAN: 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
