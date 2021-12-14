@@ -198,5 +198,26 @@
   A continuación, se indica el proceso de configuración (en el examen ya estará configurado si se usa):
   - Lanzamos dos veces el script setup.sh.
    
+  Crear un troyano con njRAT (Posible ejercicio)
+  --------------------------------------------
+  Le indicamos el puerto al que queremos que se conecte la víctima.
+  Nos vamos al apartado builder y creamos el troyano.
+  Pasamos el troyano a la carpeta C:\inetpub\wwwroot\ para que podamos descargarlo.
+  Desde la víctima ejecutamos el archivo maligno.
   
-  
+  Denegación de servicio (DoS)
+  ----------------------------
+    Con Metasploit
+    --------------
+    Utilizamos el módulo auxyliary/dos/tcp/synflood
+    Debemos indicarle RHOSTS y RPORT.
+    Lo ejecutamos con exploit.
+    
+    Con hping3
+    ----------
+    hping3 -p [port] -S --flood [ip]
+    
+ Session Hijacking
+ -----------------
+ 
+    
