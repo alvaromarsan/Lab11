@@ -240,7 +240,7 @@
   API WPSCAN: 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg
   Escaneo wpscan
   --------------
-  wpscan --api-token 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg --url http://192.168.10.16:8080/CEH --plugins-detection aggresive --enumerate vp
+  wpscan --api-token 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg --url http://192.168.10.16:8080/CEH --plugins-detection aggressive --enumerate vp
   
   
   
