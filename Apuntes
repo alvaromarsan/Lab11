@@ -269,7 +269,16 @@
 			<input type="submit" value="Submit form" />
 		</form> 
 	</body>
-</html> 
+ </html> 
+ 
+ Con el usuario autenticado en la página de administración de wordpress, le hacemos que abra la página web que tenga el código mostrado arriba y modificará
+ los datos del plugin leenkme de facebook.
+ 
+ Para probar la hay que hacerlo con la máquina WS16, con WAMP activo y en la url 192.168.10.16:8080/CEH.
+ Credenciales WordPress: admin:qwerty@123
+ 
+ 
+ 
   
   
   
