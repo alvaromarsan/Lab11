@@ -369,10 +369,13 @@ Aplicación para aprender lenguajes: SoloLearn para móviles.
  6. Nos conectamos al dispositivo introduciendo su IP.
  7. Elegimos la opción 4 para navegar por la shell.
  
- 
- 
- 
-  
+ Configurar aws cli
+ ------------------
+ 1. aws configure.
+   - AWS Access Key
+   - AWS Secret Access Key
+   - Default Region Name
+ 2. 
   
   
   
