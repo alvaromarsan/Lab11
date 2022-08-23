@@ -1,0 +1,9 @@
+1. Obtener información acerca de la Aplicación Web
+--------------------------------------------------
+> whatweb <url>
+
+2. Búsqueda de directorios/ficheros en la app web
+-------------------------------------------------
+> gobuster dir -u <url> -w <wordlist>
+
+
