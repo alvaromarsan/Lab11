@@ -4,13 +4,25 @@ Fase de enumeración
   ----------------------------------------------------------------------------
   nmap -sV -v --script nbstat.nse 192.168.10.16
   
-  Enumeración NetBIOS con enum4linux
-  ----------------------------------
-  enum4linux -n [IP]
+    1.1 Enumeración NetBIOS con enum4linux
+    ----------------------------------
+    enum4linux -n [IP]
+
+    1.2 Enumeración NetBIOS desde Windows
+    -----------------------------------
+    Para obtener la información de un host
+    > nbtstat -a [ip-victima]
+
+    Para ver la información que tenemos guardada en caché:
+    > nbtstat -c
 
   2 Enumeración SNMP
   ---------------------
-  snmp-check [ip] > snmpEnum.txt
+  Lanzamos un escaneo al puerto 161 UDP con nmap para comprobar si está abierto:
+  > nmap -sU -p 161 [ip-host] -oN snmp-check.txt
+  
+  Si está abierto procedemos a enumerar la información:
+  > snmp-check [ip] > snmpEnum.txt
   
   2.1 Enumeración SNMP de usuarios con Metasploit
   -----------------------------------
@@ -39,7 +51,18 @@ Fase de enumeración
     
   4 Enumeración DNS
   -------------------
+  Comprobamos si podemos resolver el nombre de dominio con dig:
+  > dig ns <dominio>
+  
+  Comprobamos si podemos resolverlo con un servidor indicado:
+  > dig @<servidor-dns> <dominio>
+  
+  Comprobamos si podemos hacer una transferencia de zona:
+  > dig @<servidor-dns> <dominio> axfr
+  
+  4.2 Enumeración DNS en Windows
+  ------------------------------
   nslookup
   > server [ip-server]
   > ceh.com
-  > server2016.ceh.com
+  > server2016.ceh.com 
